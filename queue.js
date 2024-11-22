@@ -79,23 +79,43 @@ function countStudentsUnableToEat(students, sandwiches) {
         // The student takes the sandwich
         // The sandwich is removed from the stack
         // // Reset unableToEat counter to 0
-        if (students[0] ){
-          
+        if (students[0] === sandwiches[0]){
+          matched_student = students.shift()
+          matched_sandwich = sandwiches.shift()
+          console.log(`Student ${matched_student} taking the top sandwich ${matched_sandwich}`)
+          unableToEat = 0
         }
      // Else
         // The student goes to the end of the queue
         // Increment unableToEat counter
+        else {
+          const student = students.shift()
+          students.push(student)
+          unableToEat ++
+        }
     
     // If all students are unable to eat, i.e., unableToEat is equal to the length of students array
         // Return the number of students who are unable to eat
+        if (unableToEat === students.length){
+          return unableToEat
+        }
   }
   // After the while loop
   // Return the number of students who are unable to eat
-  
+  return unableToEat
 }
 
 // Example usage:
+// test 1: expecting 0 students unable to eat
 const students = [1, 0, 1, 0];
 const sandwiches = [0, 1, 0, 1];
+
+// test 2: expecting 1 students unable to eat
+// const students = [0, 0, 1, 0];
+// const sandwiches = [0, 1, 0, 1];
+
+// test 3: expecting 3 students unable to eat
+// const students = [1,1,1,0,0,1];
+// const sandwiches = [1,0,0,0,1,1]
 const result = countStudentsUnableToEat(students, sandwiches);
 console.log("Students unable to eat:", result);
